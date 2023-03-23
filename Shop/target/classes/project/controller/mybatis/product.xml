@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="project.product.ProductDAO">
+
+	
+	 <select id="searchPDname" resultType="pd_vo" parameterType="String">
+   		 select * from product where pd_name=#{name}
+  	</select>
+	
+	 <select id="checkCode" resultType="pdcd_vo" parameterType="String">
+   		 select * from product_code where pd_code=#{random}
+  	</select>
+  	
+  	<insert id="insertPdVo" parameterType="pd_vo">
+		insert into product (pd_code, pd_name, pd_option, pd_brand, pd_score, pd_image) 
+		values (#{pd_code}, #{pd_name},	#{pd_option}, #{pd_brand}, #{pd_score},	#{pd_image})
+	</insert>
+  	
+  	<insert id="insertPdCdVo" parameterType="pdcd_vo">
+		insert into PRODUCT_CODE (PD_CODE, CATEGORY)
+		values (#{pd_code},	#{category})
+	</insert>
+  	
+  	<insert id="insertSellerVo" parameterType="seller_vo">
+		insert into SELLER (pd_code, ID, PRICE, DELIVERY_CHARGE, DELIVERY_COMPANY, STOCK, SALE_COUNT, RANK_SCORE) 
+		values (#{pd_code}, #{id}, #{price}, #{delivery_charge}, #{delivery_company}, #{stock},	#{sale_count}, #{rank_score})
+	</insert>
+  	
+  	<insert id="insertPdImgVo" parameterType="pdimg_vo">
+		insert into PRODUCT_IMAGE (PD_CODE, ID, IMG1, IMG2, IMG3, IMG4, DETAILIMG)
+		values (#{pd_code}, #{id}, #{img1}, #{img2}, #{img3}, #{img4}, #{detailimg})
+	</insert>
+		
+	 <select id="searchSellerPDCDID" resultType="seller_vo" parameterType="java.util.HashMap">
+   		 select * from SELLER where pd_code=#{pdCode} and id=#{id}
+  	</select>
+  	
+  	<select id="selectSellerCount" resultType="int">
+		select count(*) from SELLER
+	</select>	 
+	
+  	<select id="selectSellerCountD1" parameterType="String" resultType="int">
+		select count(*) from SELLER where SUBSTR(pd_code, 1, 2) = #{categoryInt}
+	</select>	 
+	
+  	<select id="selectSellerCountD2" parameterType="String" resultType="int">
+		select count(*) from SELLER where SUBSTR(pd_code, 1, 4) = #{categoryInt}
+	</select>	 
+	
+  	<select id="selectSellerCountD3" parameterType="String" resultType="int">
+		select count(*) from SELLER where SUBSTR(pd_code, 1, 7) = #{categoryInt}
+	</select>	 
+	
+	<select id="selectSellerListAll" parameterType="java.util.HashMap" resultType="seller_vo">
+	 	<![CDATA[
+			select * from (
+				select rownum rnum, TT.* from (
+					select * from SELLER order by rank_score desc
+				) TT where rownum <= #{endNo}
+			) where rnum >= #{startNo} 		 		
+		]]>
+	</select>
+	
+	<select id="selectSellerListD1" parameterType="java.util.HashMap" resultType="seller_vo">
+	 	<![CDATA[
+			select * from (
+				select rownum rnum, TT.* from (
+					select * from SELLER where SUBSTR(pd_code, 1, 2) = #{category} order by rank_score desc
+				) TT where rownum <= #{endNo}
+			) where rnum >= #{startNo} 		 		
+		]]>
+	</select>
+
+	<select id="selectSellerListD2" parameterType="java.util.HashMap" resultType="seller_vo">
+	 	<![CDATA[
+			select * from (
+				select rownum rnum, TT.* from (
+					select * from SELLER where SUBSTR(pd_code, 1, 4) = #{category} order by rank_score desc
+				) TT where rownum <= #{endNo}
+			) where rnum >= #{startNo} 		 		
+		]]>
+	</select>
+
+	<select id="selectSellerListD3" parameterType="java.util.HashMap" resultType="seller_vo">
+	 	<![CDATA[
+			select * from (
+				select rownum rnum, TT.* from (
+					select * from SELLER where SUBSTR(pd_code, 1, 7) = #{category} order by rank_score desc
+				) TT where rownum <= #{endNo}
+			) where rnum >= #{startNo} 		 		
+		]]>
+	</select>
+
+	<select id="selectProductList" parameterType="java.util.List" resultType="pd_vo">
+	 	 select * from product where pd_code in
+	 	 <foreach collection="list" item="item" open="(" close=")" separator=",">
+	 	 #{item.pd_code}
+	 	 </foreach>
+	</select>
+
+	<select id="selectProductListFrmSelVO" parameterType="seller_vo" resultType="pd_vo">
+	 	 select * from product where pd_code = #{pd_code}
+	</select>
+	
+  	<select id="selectReviewCount" parameterType="String" resultType="int">
+		select count(*) from REVIEW where pd_code = #{productCode}
+	</select>	 
+	
+	<select id="selectReviewList" parameterType="java.util.HashMap" resultType="rev_vo">
+	 	<![CDATA[
+			select * from (
+				select rownum rnum, TT.* from (
+					select * from REVIEW where pd_code = #{pdCode} order by WRITE_DATE desc
+				) TT where rownum <= #{endNo}
+			) where rnum >= #{startNo} 		 		
+		]]>
+	</select>
+	
+	<select id="selectProductImg" parameterType="java.util.HashMap" resultType="pdimg_vo">
+		select * from PRODUCT_IMAGE where pd_code = #{pdCode} AND ID = #{id}
+	</select>
+	
+	 <select id="searchProduct" resultType="pd_vo" parameterType="String">
+   		 select * from product where pd_code=#{productCode}
+  	</select>
+  	
+	 <select id="selectCartList" resultType="cart_vo" parameterType="String">
+   		 select * from CART where id=#{id}
+  	</select>
+  	
+  	<delete id="removeCart" parameterType="java.util.HashMap">
+		delete from CART where pd_code = #{pdCode} AND ID = #{id} AND SELLER_ID = #{sellerID}
+	</delete>
+  	
+  	<select id="searchCart" parameterType="java.util.HashMap" resultType="cart_vo">
+		select * from CART where pd_code = #{pdCode} AND ID = #{id} AND SELLER_ID = #{sellerID}
+	</select>
+	
+	<update id="updateCartCount" parameterType="cart_vo">
+		update CART set count = #{count} where pd_code = #{pd_code} and ID = #{id} AND SELLER_ID = #{seller_id}
+	</update>
+	
+	<insert id="insertCart" parameterType="cart_vo">
+		insert into CART (ID, PD_CODE, SELLER_ID, COUNT)
+		values (#{id}, #{pd_code}, #{seller_id}, #{count})
+	</insert>
+  	
+</mapper>

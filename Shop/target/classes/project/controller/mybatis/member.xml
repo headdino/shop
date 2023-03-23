@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="project.member.MemberDAO">
+
+	<!-- 회원가입 1건을 저장한다. -->
+	<insert id="mbInsert" parameterType="mb_vo">
+		insert into member (id, password, name, nickname, email) 
+		values (#{id}, #{password}, #{name}, #{nickname}, #{email})
+	</insert>
+	
+	<!-- MemberVO에서 String id를 넘겨받아서 같은 아이디를 가진 memberVO를 찾아주는 명령문 -->
+	 <select id="mbSearch" resultType="mb_vo" parameterType="String">
+   		 select * from member where id=#{id}
+  	</select>
+  	
+  	<!-- email이 같은 ID들을 반환하는 명령문 -->
+  	<select id="findID" resultType="String" parameterType="String">
+  		select ID from member where email=#{email}
+  	</select>
+  	
+	 <select id="addrSearch" resultType="addr_vo" parameterType="String">
+   		 select * from MEMBERADDRESS where id=#{id}
+  	</select>
+  	
+  	<insert id="saveAddress" parameterType="addr_vo">
+  		insert into memberaddress (id, addrName, addr, detail_addr, phone, memo)
+  		values (#{id}, #{addrName}, #{addr}, #{detail_addr}, #{phone}, #{memo})
+  	</insert>
+  	
+  	<delete id="deleteAddress" parameterType="addr_vo">
+  		delete from memberaddress where addrName = #{addrName} and id = #{id} 
+  	</delete>
+  	
+  	<update id="updateAddress" parameterType="java.util.Map">
+  		update memberaddress set addrName = #{addrName}, addr = #{addr}, detail_addr = #{detail_addr}, phone = #{phone},
+  		memo = #{memo} where id = #{id} and addrName = #{targetName}
+  	</update>
+  	
+	<update  id="mbUpdate" parameterType="mb_vo">
+		update member set nickname = #{nickname} where id = #{id} 
+	</update>
+	
+<!-- admin에 쓰임  -->
+	<select id="amSelectList" resultType="mb_vo">
+		select * from member order by signupdate desc
+	</select>
+	
+	 <select id="amSelectAll" resultType="mb_vo" >
+	select * from member order by signupdate
+	</select>
+	
+	<select id="amSelectAdmin" resultType="mb_vo">
+	select * from member where grade = 'y'
+	</select>
+	
+	<select id="amSelectNomal" resultType="mb_vo">
+	select * from member where grade = 'n'
+	</select>
+	
+	<select id="amSelectWarning" resultType="mb_vo">
+	select * from member where grade = 'w'
+	</select>
+	
+	<select id="amSelectBlock" resultType="mb_vo">
+	select * from member where grade = 'b'
+	</select>
+	
+		
+
+
+	
+</mapper>

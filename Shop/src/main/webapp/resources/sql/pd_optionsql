@@ -1,0 +1,24 @@
+
+  CREATE TABLE "SSH"."PD_OPTION" 
+   (	
+    "MAIN_PD_CODE" NUMBER, 
+	"PD_CODE" NUMBER, 
+	"OPTION_NAME" VARCHAR2(50 BYTE), 
+	"PRICE" NUMBER
+   );
+
+
+drop table PD_OPTION;
+      
+delete from PD_OPTION;
+
+ 
+insert into PD_OPTION (MAIN_PD_CODE, PD_CODE, OPTION_NAME, PRICE) 
+    values (1, 1, '대형', 3000);
+
+select * from PD_OPTION;
+select count(*) from PD_OPTION;
+
+select * from PD_OPTION where pd_code=1;
+
+commit;

@@ -1,0 +1,38 @@
+  CREATE TABLE "SSH"."SELLER" 
+   (	
+    "PD_CODE" VARCHAR2(20 BYTE), 
+	"ID" VARCHAR2(20 BYTE), 
+	"PRICE" NUMBER, 
+	"DELIVERY_CHARGE" NUMBER, 
+	"DELIVERY_COMPANY" VARCHAR2(20 BYTE), 
+	"STOCK" NUMBER, 
+	"SALE_COUNT" NUMBER, 
+	"RANK_SCORE" NUMBER
+   );
+   
+drop table SELLER;
+      
+delete from SELLER;
+
+ 
+insert into SELLER (pd_code, ID, PRICE, DELIVERY_CHARGE, DELIVERY_COMPANY, STOCK, SALE_COUNT, RANK_SCORE) 
+    values ('1', 'q', 50000, 3000, '로젠택배', 10, 2, 100);
+
+select * from SELLER;
+select count(*) from SELLER;
+
+select * from SELLER where pd_code=1;
+
+select * from SELLER where pd_code=1 and id='스타리빙';	 		
+
+update SELLER set RANK_SCORE = 400 where pd_code ='0000000275770744';
+update SELLER set RANK_SCORE = 420 where pd_code ='0000001026247838';
+update SELLER set RANK_SCORE = 220 where pd_code ='0000002246047655';
+update SELLER set RANK_SCORE = 320 where pd_code ='0001010333885762';
+update SELLER set RANK_SCORE = 310 where pd_code ='0001011343850410';
+update SELLER set RANK_SCORE = 110 where pd_code ='0001012534203111';
+
+update SELLER set RANK_SCORE = 100 where pd_code ='0201010560558147' and id = 'w';
+update SELLER set RANK_SCORE = -1 where pd_code ='0201010560558147' and id = 'q';
+
+commit;

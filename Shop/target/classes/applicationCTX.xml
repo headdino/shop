@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 회원정보의 빈  -->
+	<bean id="memberVO" class="project.member.MemberVO"/>
+	<bean id="memberAddressVO" class="project.member.MemberAddressVO"/>
+	
+	<!-- 상품관련된 VO빈 -->
+	<bean id="optionVO" class="project.product.vo.OptionVO" />
+	<bean id="productCodeVO" class="project.product.vo.ProductCodeVO" />
+	<bean id="productVO" class="project.product.vo.ProductVO" />
+	<bean id="reviewVO" class="project.product.vo.ReviewVO" />
+	<bean id="sellerVO" class="project.product.vo.SellerVO" />
+	<bean id="productImgVO" class="project.product.vo.ProductImageVO" />
+	<bean id="productList" class="project.product.vo.ProductList" />
+	<bean id="cartVO" class="project.product.vo.CartVO" />
+
+	
+</beans>

@@ -1,0 +1,23 @@
+
+  CREATE TABLE "SSH"."PRODUCT_CODE" 
+   (	
+    "PD_CODE" VARCHAR2(20 BYTE) NOT NULL ENABLE, 
+	"CATEGORY" VARCHAR2(500 BYTE), 
+	 CONSTRAINT "PRODUCT_CODE_PK" PRIMARY KEY ("PD_CODE")
+    );
+
+
+drop table PRODUCT_CODE;
+      
+delete from PRODUCT_CODE;
+
+ 
+insert into PRODUCT_CODE (PD_CODE, CATEGORY) 
+    values (1, '반려동물용품>고양이용품>캣타워/스크래쳐');
+
+select * from PRODUCT_CODE;
+select count(*) from PRODUCT_CODE;
+
+select * from PRODUCT_CODE where pd_code=1;
+
+commit;

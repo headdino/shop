@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<typeAliases>
+		<typeAlias type="project.member.MemberVO" alias="mb_vo"/>
+		<typeAlias type="project.member.MemberAddressVO" alias="addr_vo"/>
+		
+		<typeAlias type="project.product.vo.OptionVO" alias="option_vo"/>
+		<typeAlias type="project.product.vo.ProductCodeVO" alias="pdcd_vo"/>
+		<typeAlias type="project.product.vo.ProductVO" alias="pd_vo"/>
+		<typeAlias type="project.product.vo.ReviewVO" alias="rev_vo"/>
+		<typeAlias type="project.product.vo.SellerVO" alias="seller_vo"/>
+		<typeAlias type="project.product.vo.ProductImageVO" alias="pdimg_vo"/>
+		<typeAlias type="project.product.vo.CartVO" alias="cart_vo"/>
+		<!-- <typeAlias type="project.board.free.FreeboardVO" alias="fb_vo" />
+		<typeAlias type="project.board.free.FreeboardCommentVO" alias="fbc_vo"/>
+		<typeAlias type="project.board.event.EventboardVO" alias="ev_vo" />
+		<typeAlias type="project.board.event.EventboardCommentVO" alias="evc_vo" />
+		<typeAlias type="project.item.ItemVO" alias="item_vo" />
+		<typeAlias type="project.item.ItemCommentVO" alias="item_co" />
+		<typeAlias type="project.item.ItemAvgVO" alias="item_ao" />
+		<typeAlias type="project.util.calendar.ScheduleVO" alias="sche_vo"/> -->
+	</typeAliases>
+	
+</configuration>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

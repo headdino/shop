@@ -1,0 +1,28 @@
+
+   CREATE TABLE "SSH"."REVIEW" 
+   (	
+    "ID" VARCHAR2(100 BYTE), 
+	"PD_CODE" VARCHAR2(20 BYTE), 
+	"SCORE" NUMBER, 
+	"REVIEWS" VARCHAR2(2000 BYTE),
+    "SELLER_ID" VARCHAR2(100 BYTE), 
+	"WRITE_DATE" DATE DEFAULT sysdate NOT NULL
+   );
+
+
+drop table REVIEW;
+      
+delete from REVIEW;
+
+ 
+insert into REVIEW (ID, PD_CODE, SCORE, REVIEWS, SELLER_ID) 
+    values ('gildong', '0005050703700478', 5, '배송도 빠르고 물건도 너무너무 좋아요', 'q');
+
+select * from REVIEW;
+select count(*) from REVIEW;
+
+select * from REVIEW where pd_code=1;
+
+select count(*) from REVIEW where pd_code = 1;
+
+commit;
